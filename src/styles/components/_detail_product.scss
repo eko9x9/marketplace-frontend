@@ -1,0 +1,71 @@
+.profile {
+    .avatar {
+        width: 60px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        img {
+            border-radius: 100px;
+            height: auto;
+            width: 100%;
+        }
+    }
+
+    .btn-follow {
+        margin-top: 15px;
+        border: 2px solid black;
+        background-color: white;
+        color: black;
+        cursor: pointer;
+        border-radius: 10px;
+        padding: 5px;
+        font-size: 13px;
+        font-weight: bold;
+
+        border-color: #04AA6D;
+        color: green;
+    }
+
+    .detail-market {
+        margin-top: 15px;
+        border: 2px solid black;
+        background-color: white;
+        color: black;
+        cursor: pointer;
+        border-radius: 10px;
+        padding: 5px;
+        font-size: 13px;
+        font-weight: bold;
+        margin-left: 10px;
+
+        border-color: #2196F3;
+        color: dodgerblue;
+    }
+}
+
+.info-product {
+    margin-top: 10px;
+    .top {
+        margin-top: 10px;
+        padding-left: 20px;
+    }
+
+    .buttom {
+        display: flex;
+        margin-top: 10px;
+
+        .stars {
+            padding-left: 8px;
+            display: flex;
+            align-items: center;
+            border-right: 1px solid black;
+            padding-right: 5px;
+    
+            i {
+                color: #3CBA2F;
+            }
+        }
+    }
+
+    
+}

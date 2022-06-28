@@ -1,0 +1,118 @@
+@use "sass:math";
+
+@mixin clearfix {
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+// MEDIA QUERY
+
+@mixin resp-phone {
+    @media (max-width: 600px) {
+        @content;
+    }
+}
+
+@mixin grid-center-last( $columns ) {
+	$total_columns: $columns * 2;
+	$span:  math.div($total_columns, $columns) ;
+	$offset: $columns - 1;
+	$nth-child: if( $columns % 2 == 0, 'odd', 'even' );
+
+	display: grid;
+	grid-template-columns: repeat( $total_columns, 1fr );
+
+	& > * {
+		grid-column: span $span;
+
+		&:nth-last-child(#{$offset}):nth-child(#{$nth-child}) {
+			grid-column: $span / span $span;
+		}
+	}
+}
+
+@mixin respond($breakpoint) {
+    
+    @if $breakpoint == phone {
+        @media (max-width: 37.5em) { //600
+            @content;
+        }
+    }
+
+    @if $breakpoint == tab-port { // 900
+        @media (max-width: 56.25em) {
+            @content;
+        }
+    }
+
+    @if $breakpoint == tab-land { // 1200
+        @media (max-width: 75em) {
+            @content;
+        }
+    }
+
+    @if $breakpoint == big-desktop {
+        @media (min-width: 112.5em) {
+            @content;
+        }
+    }
+    
+    @if $breakpoint == max-1100 {
+        @media (max-width: 1100px) {
+            @content;
+        }
+    }
+
+    @if $breakpoint == max-1200 {
+        @media (max-width: 1200px) {
+            @content;
+        }
+    }
+
+    @if $breakpoint == min-1200 {
+        @media (min-width: 1200px) {
+            @content;
+        }
+    }
+
+    @if $breakpoint == max-450 {
+        @media (max-width: 450px) {
+            @content;
+        }
+    }
+
+    @if $breakpoint == max-950 {
+        @media (max-width: 950px) {
+            @content;
+        }
+    }
+
+    @if $breakpoint == min-950 {
+        @media (min-width: 950px) {
+            @content;
+        }
+    }
+
+    @if $breakpoint == max-700 {
+        @media (max-width: 700px) {
+            @content;
+        }
+    }
+
+    @if $breakpoint == max-800 {
+        @media (max-width: 800px) {
+            @content;
+        }
+    }
+    
+    @if $breakpoint == min-800 {
+        @media (min-width: 800px) {
+            @content;
+        }
+    }
+
+
+}

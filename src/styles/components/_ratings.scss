@@ -1,0 +1,16 @@
+.ratings {
+    margin-top: 20px;
+    width: 100%;
+    text-align: center ;
+
+    .stars {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .icons {
+            color: #DBDEE2;
+        }
+    }
+}
