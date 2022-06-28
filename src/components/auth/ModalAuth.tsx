@@ -14,17 +14,17 @@ const ModalAuth = (props: Props) => {
 				</div>
 				<div className="modal-body modal-body-sub_agile">
 				<div className="col-md-8 modal_body_left modal_body_left1">
-				<h3 className="agileinfo_sign">Sign In <span>Now</span></h3>
-						<form action="#" method="post">
+				<h3 className="agileinfo_sign">Masuk <span>Sekarang</span></h3>
+				<form action="#" method="post">
 					<div className="styled-input agile-styled-input-top">
-					<input type="text" name="Name" />
-					<label>Name</label>
-					<span></span>
+						<input type="email" />
+						<label>Email</label>
+						<span></span>
 					</div>
 					<div className="styled-input">
-					<input type="email" name="Email" /> 
-					<label>Email</label>
-					<span></span>
+						<input type="password" /> 
+						<label>Kata sandi</label>
+						<span></span>
 					</div> 
 					<input type="submit" value="Sign In" />
 				</form>
@@ -43,7 +43,7 @@ const ModalAuth = (props: Props) => {
 										<div className="back"><i className="fa fa-linkedin" aria-hidden="true"></i></div></a></li>
 								</ul>
 								<div className="clearfix"></div>
-								<p><a href="#" data-toggle="modal" data-target="#myModal2" > Don't have an account?</a></p>
+								<p><a href="#" data-toggle="modal" data-target="#myModal2" > Belum Punya Akun?</a></p>
 
 				</div>
 				<div className="col-md-4 modal_body_right modal_body_right1">
@@ -66,11 +66,11 @@ const ModalAuth = (props: Props) => {
 				</div>
 				<div className="modal-body modal-body-sub_agile">
 				<div className="col-md-8 modal_body_left modal_body_left1">
-				<h3 className="agileinfo_sign">Sign Up <span>Now</span></h3>
+				<h3 className="agileinfo_sign">Daftar <span>Sekarang</span></h3>
 				<form action="#" method="post">
 					<div className="styled-input agile-styled-input-top">
 					<input type="text" name="Name" />
-					<label>Name</label>
+					<label>Nama</label>
 					<span></span>
 					</div>
 					<div className="styled-input">
@@ -79,13 +79,13 @@ const ModalAuth = (props: Props) => {
 					<span></span>
 					</div> 
 					<div className="styled-input">
-					<input type="password" name="password" /> 
-					<label>Password</label>
+					<input type="password" /> 
+					<label>Kata sandi</label>
 					<span></span>
 					</div> 
 					<div className="styled-input">
 					<input type="password" name="Confirm Password" /> 
-					<label>Confirm Password</label>
+					<label>Konfirmasi kata sandi</label>
 					<span></span>
 					</div> 
 					<input type="submit" value="Sign Up" />
@@ -105,7 +105,7 @@ const ModalAuth = (props: Props) => {
 										<div className="back"><i className="fa fa-linkedin" aria-hidden="true"></i></div></a></li>
 								</ul>
 								<div className="clearfix"></div>
-								<p><a href="#">By clicking register, I agree to your terms</a></p>
+								<p><a href="#">Dengan mendaftar, saya menerima persyaratan dan ketentuan!</a></p>
 
 				</div>
 				<div className="col-md-4 modal_body_right modal_body_right1">
