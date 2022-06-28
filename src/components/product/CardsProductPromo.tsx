@@ -39,7 +39,7 @@ const CardsProductPromo = (props: Props) => {
                                                 <del>Rp 102.000</del>
                                             </div>
                                             <div className="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                                <input type="submit" name="submit" value="Add to cart" className="button" />
+                                                <input type="submit" name="submit" value="Tambahkan Ke Kerjang" className="button" />
                                             </div>
                                                                                 
                                         </div>

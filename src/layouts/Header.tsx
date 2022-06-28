@@ -11,7 +11,7 @@ const Header = (props: Props) => {
               <li><i className="fa-solid fa-shop"></i>Mulai berjualan</li>
               <li> <i className="fa-solid fa-receipt"></i>Promo</li>
               <li> <i className="fa-solid fa-heart"></i> Tokoku care </li>
-              <li> <i className="fa-solid fa-address-card"></i>Tentang tokoku </li>
+              <li> <i className="fa-solid fa-address-card"></i>Tentang Tokoku </li>
           </ul>
         </div>
       </div>
@@ -26,7 +26,7 @@ const Header = (props: Props) => {
             </form>
           </div>
             <div className="col-md-4 logo_agile">
-              <h1><a href="index.html"><span>E</span>lite Shoppy <i className="fa fa-shopping-bag top_logo_agile_bag" aria-hidden="true"></i></a></h1>
+              <h1><a href="index.html"><span>T</span>okoku <i className="fa fa-shopping-bag top_logo_agile_bag" aria-hidden="true"></i></a></h1>
             </div>
           <div className="col-md-4 agileits-social top_content">
             <ul className="social-nav model-3d-0 footer-social w3_agile_social">

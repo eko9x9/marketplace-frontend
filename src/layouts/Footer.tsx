@@ -8,7 +8,7 @@ const Footer = (props: Props) => {
           <div className="footer">
             <div className="footer_agile_inner_info_w3l">
                 <div className="col-md-3 footer-left">
-                    <h2><a href="index.html"><span>E</span>lite Shoppy </a></h2>
+                    <h2><a href="index.html"><span>T</span>okoku </a></h2>
                     <p>Lorem ipsum quia dolor
                     sit amet, consectetur, adipisci velit, sed quia non 
                     numquam eius modi tempora.</p>
@@ -71,7 +71,7 @@ const Footer = (props: Props) => {
 
                 <div className="clearfix"></div>
             </div>
-                <p className="copy-right">&copy 2017 Elite shoppy. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+                <p className="copy-right">&copy 2022 Tokoku. All rights reserved</p>
             </div>
         </div>
       </React.Fragment>
