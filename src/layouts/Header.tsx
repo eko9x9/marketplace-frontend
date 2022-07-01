@@ -164,7 +164,7 @@ const Header = (props: Props) => {
           <div className="modal-body modal-body-sub_agile">
           <div className="col-md-8 modal_body_left modal_body_left1">
           <h3 className="agileinfo_sign">Masuk <span>Sekarang</span></h3>
-          <form >
+          <div >
             <div className="styled-input agile-styled-input-top">
               <input type="text" onChange={(e) => setUsername(e.target.value)} />
               <label>Username</label>
@@ -185,7 +185,7 @@ const Header = (props: Props) => {
                 })
               }
             }} type="submit" value="Masuk" />
-          </form>
+          </div>
             <ul className="social-nav model-3d-0 footer-social w3_agile_social top_agile_third">
                     <li><a href="#" className="facebook">
                       <div className="front"><i className="fa fa-facebook" aria-hidden="true"></i></div>
@@ -225,7 +225,7 @@ const Header = (props: Props) => {
           <div className="modal-body modal-body-sub_agile">
           <div className="col-md-8 modal_body_left modal_body_left1">
           <h3 className="agileinfo_sign">Daftar <span>Sekarang</span></h3>
-          <form action="#" method="post">
+          <div>
             <div className="styled-input agile-styled-input-top">
             <input type="text" name="Name" />
             <label>Username</label>
@@ -247,7 +247,7 @@ const Header = (props: Props) => {
             <span></span>
             </div> 
             <input type="submit" value="Sign Up" />
-          </form>
+          </div>
             <ul className="social-nav model-3d-0 footer-social w3_agile_social top_agile_third">
                     <li><a href="#" className="facebook">
                       <div className="front"><i className="fa fa-facebook" aria-hidden="true"></i></div>
