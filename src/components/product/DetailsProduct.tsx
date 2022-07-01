@@ -1,9 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import Url from '../../libs/url';
 import ModalFormBuy from './ModalFormBuy';
 
 type Props = {}
 
 const DetailsProduct = (props: Props) => {
+  const { productId } = useParams();
+
+  const [dataProductDetail, setDataProductDetail] = useState({});
+
+  useEffect(() => {
+    const fDataProductDetail = async() => {
+      const x = await fetch(`${Url.apiUrl}/product/get-product-and-review/${productId}`).then(r => r.json());
+      setDataProductDetail(x);
+      console.log(x);
+    }
+
+    fDataProductDetail();
+  }, [])
+  
 
   return (
     <React.Fragment>
@@ -39,7 +55,7 @@ const DetailsProduct = (props: Props) => {
           </div>
           <div className="col-md-8 single-right-left simpleCart_shelfItem">
                 <h3>Big Wing Sneakers  (Navy)</h3>
-                <p><span className="item_price">$650</span> <del>- $900</del></p>
+                <p><span className="item_price">$650</span> <del></del></p>
                 <div style={{paddingBottom: 10}} className="description border-bottom">
                   <h3>Pengiriman</h3>
                   <div className="sender">
@@ -51,7 +67,7 @@ const DetailsProduct = (props: Props) => {
                     <i style={{paddingRight: 10, paddingTop: 5}} className="fa-solid fa-truck-fast"></i>
                       <p>Ongkir Reguler rp 18.000</p>
                     </div>
-                    <p>Estimasi tiba 1 - 2 Jul</p>
+                    <p>Estimasi tiba 1 - 2 Juli</p>
                   </div>
                 </div>
                 <div style={{paddingBottom: 10}} className="description border-bottom">

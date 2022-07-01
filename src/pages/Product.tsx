@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React, {  } from 'react';
 import { Helmet } from 'react-helmet';
-import ModalAuth from '../components/auth/ModalAuth';
 import DetailsProduct from '../components/product/DetailsProduct';
 import BannerTop from '../layouts/BannerTop';
 import Footer from '../layouts/Footer';
@@ -22,7 +21,6 @@ function App() {
         <Header />
         <BannerTop />
         <DetailsProduct />
-        <ModalAuth />
         <Footer />
     </React.Fragment>
   );

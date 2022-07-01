@@ -7,6 +7,11 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Product from './pages/Product';
 import Managements from './pages/Managements';
+import Bills from './pages/Bills';
+import ConfirmPayment from './pages/ConfirmPayment';
+import AddProduct from './pages/AddProduct';
+import ProductSold from './pages/ProductSold';
+import ProductPromo from './pages/ProductPromo';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,7 +22,14 @@ root.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/product/detail/:productId" element={<Product />} />
-        <Route path="/management" element={<Managements />} />
+        <Route path="/bills" element={<Bills />} />
+        <Route path="/confirm-payment" element={<ConfirmPayment />} />
+        <Route path="/con" element={<ConfirmPayment />} />
+
+        <Route path="/management/shop" element={<Managements />} />
+        <Route path="/management/shop/add-product" element={<AddProduct />} />
+        <Route path="/management/shop/product-sold" element={<ProductSold />} />
+        <Route path="/management/shop/product-promo" element={<ProductPromo />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

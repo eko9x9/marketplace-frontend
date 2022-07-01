@@ -1,10 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
 
 type Props = {
   productId: any
 }
 
 const ModalFormBuy = (props: Props) => {
+  const [tokenLogin, setTokenLogin] = useState("");
+
+  const MySwal = withReactContent(Swal);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token_login");
+    if(token){
+      setTokenLogin(token)
+    }
+  }, [tokenLogin])
+  
   return (
       <React.Fragment>
         <div className="modal fade" id="modalBuy" tabIndex={1} role="dialog">
@@ -45,7 +59,14 @@ const ModalFormBuy = (props: Props) => {
                     </select>
                   </div>
               </div> 
-                <input style={{marginTop: 20}} type="submit" value="Proses pembayaran" />
+                <input onClick={() => {
+                  if(tokenLogin == ""){
+                    MySwal.fire({
+                      text: "Silahkan login terlebih dahulu!",
+                      icon: "error"
+                    });
+                  }
+                }} style={{marginTop: 20}} type="submit" value="Proses pembayaran" />
             </div>
             <div className="clearfix"></div>
             </div>

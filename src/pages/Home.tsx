@@ -1,6 +1,5 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import ModalAuth from '../components/auth/ModalAuth'
 import Carousel from '../components/Carousel'
 import CardsProduct from '../components/product/CardsProduct'
 import CardsProductPromo from '../components/product/CardsProductPromo'
@@ -25,9 +24,8 @@ const Home = (props: Props) => {
         <Header />
         <BannerTop />
         <Carousel />
-        <CardsProductPromo />
+        {/* <CardsProductPromo /> */}
         <CardsProduct />
-        <ModalAuth />
         <Footer />
       </React.Fragment>
   )

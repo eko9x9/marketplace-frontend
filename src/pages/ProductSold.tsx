@@ -2,10 +2,12 @@ import React from 'react'
 import VoltSidebar from '../layouts/VoltSidebar'
 import VoltWrapperContent from '../layouts/VoltWrapperContent';
 import { Helmet } from "react-helmet";
+import FormAddProduct from '../components/product/FormAddProduct';
+import TableProductSold from '../components/product/TableProductSold';
 
 type Props = {}
 
-const Managements = (props: Props) => {
+const ProductSold = (props: Props) => {
   return (
       <React.Fragment>
           <Helmet>
@@ -13,16 +15,14 @@ const Managements = (props: Props) => {
             <link type="text/css" href="/volt-vendor/notyf/notyf.min.css" rel="stylesheet" />
             <link type="text/css" href="/volt-css/volt.css" rel="stylesheet" />
           </Helmet>
-          <VoltSidebar activeMenu="home" />
+          <VoltSidebar activeMenu="product-sold" />
           <VoltWrapperContent >
-            <div className="container-fluid">
-              <div className="row">
-                <div className="" style={{height: 500}}></div>
-              </div>
+            <div className="container-fluid mt-3">
+              {/* <TableProductSold /> */}
             </div>
           </VoltWrapperContent>
       </React.Fragment>
   )
 }
 
-export default Managements
+export default ProductSold
