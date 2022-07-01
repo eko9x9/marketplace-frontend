@@ -1,5 +1,5 @@
 const Url = {
-    apiUrl: "http://localhost:8080"
+    apiUrl: "https://tokoku.cryptaniankingdom.com"
 }
 
 export default Url
