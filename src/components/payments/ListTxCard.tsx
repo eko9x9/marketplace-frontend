@@ -10,7 +10,7 @@ import withReactContent from 'sweetalert2-react-content';
 import { useNavigate } from 'react-router';
 import Url from '../../libs/url';
 
-export default function ListBill() {
+export default function ListTxCard() {
 
     const MySwal = withReactContent(Swal);
     const navigate = useNavigate();
@@ -26,7 +26,7 @@ export default function ListBill() {
                 }
             }).then(r => r.json());
 
-            const f = fOrders.filter((x: any) => x.status_order == "Menunggu Pembayaran" || x.status_order == "Pembayaran ditolak, silahkan konfirmasi lagi jika sudah bayar!" ||  x.status_order == "Menunggu Persetujuan Pembayaran")
+            const f = fOrders.filter((x: any) => x.status_order == "Barang diterima.")
             setDataOrders(f);
         }
         if(token){
@@ -39,13 +39,13 @@ export default function ListBill() {
     return (
         <React.Fragment>
             <div style={{paddingBottom: 30, marginTop: 20}} className="bills">
-                <h3 style={{textAlign: "center"}}>Tagihan Saya</h3>
+                <h3 style={{textAlign: "center"}}>History Transaksi</h3>
                 { 
                     dataOrders?.map((val: any) => (
                         <div style={{width: "100%", display: "flex", justifyContent: "center"}} className="card">
                             <Card sx={{ maxWidth: 800, width: "85%" }}>
                                 <CardContent>
-                                    <h5 style={{textAlign: "right"}}>{val.status_order}</h5>
+                                <h5 style={{textAlign: "right"}}>{val.status_order}</h5>
                                     <Typography sx={{marginTop: 1}} gutterBottom variant="h6" component="div">
                                         {val.product.name}
                                     </Typography>
@@ -56,26 +56,27 @@ export default function ListBill() {
                                         Nomor Rekening: {val.product_payment_method.account_number}
                                     </Typography>
                                     <Typography variant="body2" color="text.secondary">
-                                        Total Pembayaran: Rp {val.total_price}
+                                        Total Pembayaram: Rp {val.total_price}
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        Lokasi: {val.location}
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        Kurir: {val.type_delivery.delivery.courier}
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        Jenis pengiriman: {val.type_delivery.name}
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        Biaya pengiriman: Rp. {val.type_delivery.price}
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        Nomor resi: {val?.product_send?.resi_number}
                                     </Typography>
                                     <Typography variant="body2" color="text.secondary">
                                         Jumlah pembelian: {val.amount}
                                     </Typography>
                                 </CardContent>
-                                { val.status_order == "Menunggu Pembayaran" || val.status_order == "Pembayaran ditolak, silahkan konfirmasi lagi jika sudah bayar!" ?
-                                    <>
-                                    <CardActions>
-                                        <Button onClick={() => {
-                                            navigate(`/confirm-payment/${val.id}`)
-                                        }} size="small">Konfirmasi Pembayaran</Button>
-                                    </CardActions>
-                                    <CardActions sx={{marginTop: -1}}>
-                                        <Button  size="small">Batalkan!</Button>
-                                    </CardActions>
-                                    </>
-                                    :
-                                    null
-                                }
                             </Card>
                         </div>
                     ))

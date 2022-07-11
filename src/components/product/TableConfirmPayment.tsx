@@ -6,13 +6,36 @@ import Url from '../../libs/url';
 
 type Props = {}
 
-const TableProductSold = (props: Props) => {    
+const TableConfirmPayment = (props: Props) => {    
     const navigate = useNavigate();
     const [tokenLogin, setTokenLogin] = useState("");
-    const [selectedOrder, setSelectedOrder] = useState("");
     const [dataOrders, setDataOrders] = useState<any>([]);
     const MySwal = withReactContent(Swal);
 
+    const updateConfirmPayment = async(confirmId: any, is_accept: boolean) => {
+        const x = await fetch(`${Url.apiUrl}/management/update-confirm-payment`, {
+            method: "put",
+            headers: {
+                'Authorization': `Bearer ${tokenLogin}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                confirmPaymentId: confirmId,
+                accept: is_accept
+            })
+        }).then(r => {
+            return r
+        }).then(r => r.json());
+
+        MySwal.fire({
+            text: x.msg,
+            icon: "success"
+        });
+
+        window.location.reload()
+    }
+
+  
     useEffect(() => {
       const tokenLogin = localStorage.getItem("tokenLogin");
       const getDataOrders = async() => {
@@ -21,7 +44,7 @@ const TableProductSold = (props: Props) => {
                   "Authorization": `Bearer ${tokenLogin}`
               }
           }).then(r => r.json());
-          const filterStatus = x.filter((x: any) => x.status_order == "Barang diterima.");
+          const filterStatus = x.filter((x: any) => x.status_order == "Menunggu Persetujuan Pembayaran");
           setDataOrders(filterStatus);
       }
       if(tokenLogin){
@@ -32,7 +55,7 @@ const TableProductSold = (props: Props) => {
 
     return (
         <React.Fragment>
-            <h4 className="text-center">Produk Terjual</h4>
+            <h4 className="text-center">Konfirmasi Pembayaran Produk</h4>
                 <div className="card border-0 shadow mb-4 mt-4">
                     <div className="card-body">
                         <div className="table-responsive">
@@ -42,9 +65,10 @@ const TableProductSold = (props: Props) => {
                                         <th className="border-0 rounded-start">Product id</th>
                                         <th className="border-0 rounded-start">Username pembeli</th>
                                         <th className="border-0 rounded-start">Nama Produk</th>
+                                        <th className="border-0">Catatan pembayar</th>
                                         <th className="border-0">Total pembayaran</th>
-                                        <th className="border-0">Lokasi pengiriman</th>
-                                        <th className="border-0">Tanggal</th>
+                                        <th className="border-0">Bukti pembayaran</th>
+                                        <th className="border-0">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -59,14 +83,22 @@ const TableProductSold = (props: Props) => {
                                                 <td>
                                                     {val?.product.name}
                                                 </td>
+                                                <td className="fw-bold d-flex align-items-center">
+                                                    {val?.order_confirm_payment?.note}
+                                                </td>
                                                 <td>
                                                     Rp. {val?.total_price}
                                                 </td>
                                                 <td>
-                                                    {val?.location}
+                                                    <a style={{color: "blue"}} href={`${Url.apiUrl}/${val?.order_confirm_payment?.image_confirm_payment.image}`} target="_blank">Lihat</a>
                                                 </td>
                                                 <td>
-                                                    {val?.createdAt }
+                                                    <button onClick={() => {
+                                                        updateConfirmPayment(val?.order_confirm_payment?.id, true)
+                                                    }} className="btn btn-primary">Terima</button>
+                                                    <button onClick={() => {
+                                                        updateConfirmPayment(val?.order_confirm_payment?.id, false)
+                                                    }} style={{marginLeft: 10}} className="btn btn-primary">Tolak</button>
                                                 </td>
                                                 
                                             </tr>        
@@ -82,4 +114,4 @@ const TableProductSold = (props: Props) => {
     )
 }
 
-export default TableProductSold
+export default TableConfirmPayment

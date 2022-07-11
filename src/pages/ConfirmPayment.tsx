@@ -20,7 +20,7 @@ const ConfirmPayment = (props: Props) => {
             <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic' rel='stylesheet' type='text/css' />
         </Helmet>
         <Header />
-        <BannerTop />
+        <BannerTop active="" />
         <FormConfirmPayment />
         <Footer />
     </React.Fragment>

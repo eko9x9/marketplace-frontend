@@ -1,13 +1,13 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import ListBill from '../components/payments/ListBill'
+import MyOrder from '../components/payments/MyOrder'
 import BannerTop from '../layouts/BannerTop'
 import Footer from '../layouts/Footer'
 import Header from '../layouts/Header'
 
 type Props = {}
 
-const Bills = (props: Props) => {
+const MyOrders = (props: Props) => {
   return (
     <React.Fragment>
         <Helmet>
@@ -21,10 +21,10 @@ const Bills = (props: Props) => {
         </Helmet>
         <Header />
         <BannerTop active="" />
-        <ListBill />
+        <MyOrder />
         <Footer />
   </React.Fragment>
   )
 }
 
-export default Bills
+export default MyOrders

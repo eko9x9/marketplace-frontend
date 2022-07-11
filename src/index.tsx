@@ -12,6 +12,11 @@ import ConfirmPayment from './pages/ConfirmPayment';
 import AddProduct from './pages/AddProduct';
 import ProductSold from './pages/ProductSold';
 import ProductPromo from './pages/ProductPromo';
+import MyOrders from './pages/MyOrders';
+import ManagementConfirmPyment from './pages/ManagementConfirmPayment';
+import ManagementProductSend from './pages/ManagementProductSend';
+import HistoryTx from './pages/HistoryTx';
+import ProductCategory from './pages/ProductCategory';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -23,9 +28,13 @@ root.render(
         <Route path="/" element={<App />} />
         <Route path="/product/detail/:productId" element={<Product />} />
         <Route path="/bills" element={<Bills />} />
-        <Route path="/confirm-payment" element={<ConfirmPayment />} />
-        <Route path="/con" element={<ConfirmPayment />} />
+        <Route path="/my-orders" element={<MyOrders />} />
+        <Route path="/confirm-payment/:orderId" element={<ConfirmPayment />} />
+        <Route path="/history-transaction" element={<HistoryTx />} />
+        <Route path="/product/:categoryId" element={<ProductCategory />} />
 
+        <Route path="/management/confirm-payment" element={<ManagementConfirmPyment />} />
+        <Route path="/management/product-send" element={<ManagementProductSend /> } />
         <Route path="/management/shop" element={<Managements />} />
         <Route path="/management/shop/add-product" element={<AddProduct />} />
         <Route path="/management/shop/product-sold" element={<ProductSold />} />

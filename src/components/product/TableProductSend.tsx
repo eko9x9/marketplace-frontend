@@ -3,10 +3,11 @@ import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import Url from '../../libs/url';
+import ModalSendProduct from './ModalSendProduct';
 
 type Props = {}
 
-const TableProductSold = (props: Props) => {    
+const TableProductSend = (props: Props) => {    
     const navigate = useNavigate();
     const [tokenLogin, setTokenLogin] = useState("");
     const [selectedOrder, setSelectedOrder] = useState("");
@@ -21,7 +22,7 @@ const TableProductSold = (props: Props) => {
                   "Authorization": `Bearer ${tokenLogin}`
               }
           }).then(r => r.json());
-          const filterStatus = x.filter((x: any) => x.status_order == "Barang diterima.");
+          const filterStatus = x.filter((x: any) => x.status_order == "Pembayaran disetujui, menunggu dikirim!");
           setDataOrders(filterStatus);
       }
       if(tokenLogin){
@@ -32,7 +33,7 @@ const TableProductSold = (props: Props) => {
 
     return (
         <React.Fragment>
-            <h4 className="text-center">Produk Terjual</h4>
+            <h4 className="text-center">Produk Yang Harus Dikirim</h4>
                 <div className="card border-0 shadow mb-4 mt-4">
                     <div className="card-body">
                         <div className="table-responsive">
@@ -42,9 +43,10 @@ const TableProductSold = (props: Props) => {
                                         <th className="border-0 rounded-start">Product id</th>
                                         <th className="border-0 rounded-start">Username pembeli</th>
                                         <th className="border-0 rounded-start">Nama Produk</th>
+                                        <th className="border-0">Catatan pembayar</th>
                                         <th className="border-0">Total pembayaran</th>
                                         <th className="border-0">Lokasi pengiriman</th>
-                                        <th className="border-0">Tanggal</th>
+                                        <th className="border-0">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -59,6 +61,9 @@ const TableProductSold = (props: Props) => {
                                                 <td>
                                                     {val?.product.name}
                                                 </td>
+                                                <td className="fw-bold d-flex align-items-center">
+                                                    {val?.note}
+                                                </td>
                                                 <td>
                                                     Rp. {val?.total_price}
                                                 </td>
@@ -66,7 +71,9 @@ const TableProductSold = (props: Props) => {
                                                     {val?.location}
                                                 </td>
                                                 <td>
-                                                    {val?.createdAt }
+                                                    <button data-bs-toggle="modal" data-bs-target="#modalSendProduct" onClick={() => {
+                                                        setSelectedOrder(val?.id)
+                                                    }} className="btn btn-primary">Sudah dikirim</button>
                                                 </td>
                                                 
                                             </tr>        
@@ -78,8 +85,9 @@ const TableProductSold = (props: Props) => {
                         </div>
                     </div>
                 </div>
+                <ModalSendProduct orderId={selectedOrder}/>
         </React.Fragment>
     )
 }
 
-export default TableProductSold
+export default TableProductSend

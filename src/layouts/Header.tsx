@@ -12,15 +12,38 @@ interface Props {
 const Header = (props: Props) => {
   const navigate = useNavigate();
   const [tokenLogin, setTokenLogin] = useState("");
+  const [userInfo, setUserInfo] = useState<any>("");
+  
   const MySwal = withReactContent(Swal);
 
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
 
   useEffect(() => {
     const tokenLogin = localStorage.getItem("tokenLogin");
+
+    const infoUser = async() => {
+      const fUser = await fetch(`${Url.apiUrl}/user/info`, {
+        headers: {
+          "Authorization": `Bearer ${tokenLogin}`
+        }
+      }).then(r => {
+        if(r.status !== 200){
+          localStorage.removeItem("tokenLogin");
+          window.location.reload()
+        }
+        return r
+      }).then(r => r.json());
+  
+      setUserInfo(fUser);
+    }
+
     if(tokenLogin){
       setTokenLogin(tokenLogin)
+      infoUser()
     }
   }, [tokenLogin]);
   
@@ -61,6 +84,48 @@ const Header = (props: Props) => {
     }
   }
 
+  const registerUser = async() => {
+    if(!email || !password || !username || !confirmPassword){
+      MySwal.fire({
+        text: "Harap isi semua form!",
+        icon: "error"
+      });
+    }else if(password !== confirmPassword){
+      MySwal.fire({
+        text: "Kata sandi dan konfirmasi kata sandi tidak sama!",
+        icon: "error"
+      });
+    }else {
+      const newUser = await fetch(`${Url.apiUrl}/auth/register`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          username,
+          email,
+          password
+        })
+      }).then(r => {
+        if(r.status === 200){
+          MySwal.fire({
+            text: "Akun berhasil didaftarkan",
+            icon: "success"
+          });
+        }else {
+          MySwal.fire({
+            text: "Gagal membuat akun",
+            icon: "error"
+          });
+        }
+        return r;
+      }).then(r => r.json());
+
+      console.log(newUser);
+    }
+
+  }
+
   return (
     <React.Fragment>
       <div className="header" id="home">
@@ -93,7 +158,8 @@ const Header = (props: Props) => {
                   <button type="button" style={{ padding: "10px 25px", marginRight: 10 }} className="btn btn-info" data-toggle="modal" data-target="#myModal">
                     <i className="fa-solid fa-lock" style={{ marginRight: 10 }}></i>
                     Masuk
-                  </button><button type="button" style={{ padding: "10px 25px" }} className="btn btn-warning" data-toggle="modal" data-target="#myModal2">
+                  </button>
+                  <button  type="button" style={{ padding: "10px 25px" }} className="btn btn-warning" data-toggle="modal" data-target="#myModal2">
                       <i className="fa-solid fa-file-pen" style={{ marginRight: 10 }}></i>
                       Daftar
                   </button>
@@ -101,7 +167,7 @@ const Header = (props: Props) => {
                 :
                 <React.Fragment>
                   <div className="m-dropdown" style={{marginRight: 30}}>
-                    <Avatar className="m-dropbtn" alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                    <Avatar className="m-dropbtn" alt={userInfo?.username} src="/static/images/avatar/1.jpg" />
                     <div className="m-dropdown-content">
                       <p
                         onClick={() => {
@@ -110,11 +176,11 @@ const Header = (props: Props) => {
                           Tagihan
                       </p>
                       <p onClick={() => {
-                        
+                        navigate("/my-orders")
                       }}>Pesanan Saya</p>
 
                       <p onClick={() => {
-
+                        navigate("/history-transaction")
                       }}>History Transaksi</p>
                       <p onClick={() => {
 
@@ -227,26 +293,28 @@ const Header = (props: Props) => {
           <h3 className="agileinfo_sign">Daftar <span>Sekarang</span></h3>
           <div>
             <div className="styled-input agile-styled-input-top">
-            <input type="text" name="Name" />
+            <input value={username} onChange={e => setUsername(e.target.value)} type="text" name="username" />
             <label>Username</label>
             <span></span>
             </div>
             <div className="styled-input">
-            <input type="email" name="Email" /> 
+            <input value={email}  type="email" onChange={e => setEmail(e.target.value)} name="Email" /> 
             <label>Email</label>
             <span></span>
             </div> 
             <div className="styled-input">
-            <input type="password" /> 
+            <input value={password}  onChange={e => setPassword(e.target.value)} type="password" /> 
             <label>Kata sandi</label>
             <span></span>
             </div> 
             <div className="styled-input">
-            <input type="password" name="Confirm Password" /> 
+            <input value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}  type="password" name="Confirm Password" /> 
             <label>Konfirmasi kata sandi</label>
             <span></span>
             </div> 
-            <input type="submit" value="Sign Up" />
+            <input type="submit" onClick={() => {
+              registerUser()
+            }} value="Sign Up" />
           </div>
             <ul className="social-nav model-3d-0 footer-social w3_agile_social top_agile_third">
                     <li><a href="#" className="facebook">

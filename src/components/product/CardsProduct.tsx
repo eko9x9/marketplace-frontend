@@ -1,34 +1,53 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import { addChart } from '../../libs/addChart';
 import Url from "../../libs/url";
+import { useNavigate, useParams } from 'react-router';
 
-type Props = {}
+type Props = {
+    title: string
+}
 
 const CardsProduct = (props: Props) => {
-    const [dataProduct, setdDtaProduct] = useState([]);
+    const { categoryId } = useParams();
+
+    const [dataProduct, setdDataProduct] = useState([]);
+    const MySwal = withReactContent(Swal);
 
     useEffect(() => {
+        
         const fProduct = async() => {
             const dataProduct = await fetch(`${Url.apiUrl}/product/get-product-selected`).then(r => r.json());
-            setdDtaProduct(dataProduct);
+            setdDataProduct(dataProduct);
+        }
+        const fProductCat = async() => {
+            const x = await fetch(`${Url.apiUrl}/product/get-product-category/${categoryId}`).then(r => r.json());
+            setdDataProduct(x);
         }
 
-        fProduct()
-    }, [])
-    
+        if(!categoryId){
+            fProduct()
+        }else {
+            fProductCat()
+        }
+    }, [categoryId])
 
     return (
         <React.Fragment>
           {/* <!-- /new_arrivals -->  */}
 	        <div className="new_arrivals_agile_w3ls_info"> 
             <div className="container">
-                <h3 className="wthree_text_info">Produk Pilihan</h3>		
+                { props.title &&
+                <h3 className="wthree_text_info">{props.title}</h3>		
+                }
                     <div id="horizontalTab">
                         <div className="resp-tabs-container">
                         {/* <!--/tab_one--> */}
                             <div className="tab1">
                                 { 
-                                    dataProduct.map((data: any) => (
+                                    dataProduct?.map((data: any) => (
                                         <React.Fragment>
                                             <div className="col-md-3 product-men">
                                                 <div className="men-pro-item simpleCart_shelfItem">
@@ -37,8 +56,8 @@ const CardsProduct = (props: Props) => {
                                                                 data.image &&
                                                                 data.image.map((x: any) => (
                                                                     <>
-                                                                        <img src={`${Url.apiUrl}/${x.image}`} style={{height: 230, maxHeight: 230}} alt="" className="pro-image-front" />
-                                                                        <img src={`${Url.apiUrl}/${x.image}`} style={{height: 230, maxHeight: 230}} alt="" className="pro-image-back" />
+                                                                        <img src={`${Url.apiUrl}${x.image}`} style={{height: 230, maxHeight: 230}} alt="" className="pro-image-front" />
+                                                                        <img src={`${Url.apiUrl}${x.image}`} style={{height: 230, maxHeight: 230}} alt="" className="pro-image-back" />
                                                                     </>
                                                                 ))
                                                             }
@@ -58,7 +77,9 @@ const CardsProduct = (props: Props) => {
                                                             <span className="item_price">Rp {data.price}</span>
                                                         </div>
                                                         <div className="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                                            <input type="submit" name="submit" value="Tambah ke keranjang" className="button" />
+                                                            <input onClick={() => {
+                                                                addChart({image: `${Url.apiUrl}${data.image[0].image}`, name: data.name, price: data.price, productId: data.id})
+                                                            }} type="submit" name="submit" value="Tambah ke keranjang" className="button" />
                                                         </div>
                                                                                             
                                                     </div>
@@ -72,7 +93,7 @@ const CardsProduct = (props: Props) => {
                                                                 <i className="fa-solid fa-star"></i>
                                                                 <p style={{paddingLeft: 6}}>{data.average_stars}</p>
                                                             </div>
-                                                            <p style={{paddingLeft: 8}}>0 Terjual</p>
+                                                            <p style={{paddingLeft: 8}}>{data.order.length} Terjual</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -81,7 +102,10 @@ const CardsProduct = (props: Props) => {
                                     ))
 
                                 }
-                                
+                                { categoryId && dataProduct.length == 0 &&
+                                    <h3 style={{textAlign: "center", overflow: "hidden"}}>Tidak ada produk untuk kategori ini</h3>
+
+                                }
                                 
                                 <div className="clearfix"></div>
                             </div>

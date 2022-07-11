@@ -1,15 +1,18 @@
-import React, {  } from 'react';
-import { Helmet } from 'react-helmet';
-import DetailsProduct from '../components/product/DetailsProduct';
-import BannerTop from '../layouts/BannerTop';
-import Footer from '../layouts/Footer';
-import Header from '../layouts/Header';
+import React from 'react'
+import { Helmet } from 'react-helmet'
+import Carousel from '../components/Carousel'
+import CardsProduct from '../components/product/CardsProduct'
+import CardsProductPromo from '../components/product/CardsProductPromo'
+import BannerTop from '../layouts/BannerTop'
+import Footer from '../layouts/Footer'
+import Header from '../layouts/Header'
 
-function App() {
+type Props = {}
 
+const ProductCategory = (props: Props) => {
   return (
-    <React.Fragment>
-      <Helmet>
+      <React.Fragment>
+        <Helmet>
           <link href="/assets/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
           <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all" />
           <link href="/assets/css/font-awesome.css" rel="stylesheet" /> 
@@ -20,10 +23,10 @@ function App() {
         </Helmet>
         <Header />
         <BannerTop active=""/>
-        <DetailsProduct />
+        <CardsProduct title=""/>
         <Footer />
-    </React.Fragment>
-  );
+      </React.Fragment>
+  )
 }
 
-export default App;
+export default ProductCategory

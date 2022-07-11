@@ -2,6 +2,7 @@ import React from 'react'
 import VoltSidebar from '../layouts/VoltSidebar'
 import VoltWrapperContent from '../layouts/VoltWrapperContent';
 import { Helmet } from "react-helmet";
+import TableProduct from '../components/product/TableProduct';
 
 type Props = {}
 
@@ -15,10 +16,8 @@ const Managements = (props: Props) => {
           </Helmet>
           <VoltSidebar activeMenu="home" />
           <VoltWrapperContent >
-            <div className="container-fluid">
-              <div className="row">
-                <div className="" style={{height: 500}}></div>
-              </div>
+            <div className="container-fluid mt-3">
+              <TableProduct />
             </div>
           </VoltWrapperContent>
       </React.Fragment>

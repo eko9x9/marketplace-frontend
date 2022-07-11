@@ -2,12 +2,11 @@ import React from 'react'
 import VoltSidebar from '../layouts/VoltSidebar'
 import VoltWrapperContent from '../layouts/VoltWrapperContent';
 import { Helmet } from "react-helmet";
-import FormAddProduct from '../components/product/FormAddProduct';
-import TableProductSold from '../components/product/TableProductSold';
+import TableConfirmPayment from '../components/product/TableConfirmPayment';
 
 type Props = {}
 
-const ProductSold = (props: Props) => {
+const ManagementConfirmPyment = (props: Props) => {
   return (
       <React.Fragment>
           <Helmet>
@@ -15,14 +14,14 @@ const ProductSold = (props: Props) => {
             <link type="text/css" href="/volt-vendor/notyf/notyf.min.css" rel="stylesheet" />
             <link type="text/css" href="/volt-css/volt.css" rel="stylesheet" />
           </Helmet>
-          <VoltSidebar activeMenu="product-sold" />
+          <VoltSidebar activeMenu="add-product" />
           <VoltWrapperContent >
             <div className="container-fluid mt-3">
-              <TableProductSold />
+              <TableConfirmPayment />
             </div>
           </VoltWrapperContent>
       </React.Fragment>
   )
 }
 
-export default ProductSold
+export default ManagementConfirmPyment

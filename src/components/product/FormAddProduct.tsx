@@ -70,9 +70,8 @@ const FormAddProduct = (props: Props) => {
     fetchCategory()
   }, [])
   
-
   const requestAddProduct = async() => {
-    if(nameProduct && price && description && category){
+    if(imageProduct && nameProduct && price && description && category){
       const pMethod = [
         {
           id: 1,
@@ -91,40 +90,46 @@ const FormAddProduct = (props: Props) => {
       const fPMethod =  pMethod.filter(function(val) {
         return val.account_number !== "";
       });
-  
-      const fAddProduct = await fetch(`${Url.apiUrl}/management/add-product`, {
-        method: "post",
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          "Authorization": `Bearer ${tokenLogin}`
-        },
-        body: JSON.stringify({
-          name: nameProduct,
-          price: price,
-          description: description,
-          categoryId: category,
-          paymentMethod: fPMethod
-        })
-      }).then(async(r) => {
-        if(r.status == 200){
-          MySwal.fire({
-            text: "Sukses manambahkan produk!",
-            icon: "success"
-          });
-          const val = await r.json();
-          if(imageProduct){
-            await requestUploadImageProduct(val.data.id)
+      
+      if(fPMethod.length === 0){
+        MySwal.fire({
+          text: "Tambahkan metode pembayaran!",
+          icon: "error"
+        });
+      }else {
+        const fAddProduct = await fetch(`${Url.apiUrl}/management/add-product`, {
+          method: "post",
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            "Authorization": `Bearer ${tokenLogin}`
+          },
+          body: JSON.stringify({
+            name: nameProduct,
+            price: price,
+            description: description,
+            categoryId: category,
+            paymentMethod: fPMethod
+          })
+        }).then(async(r) => {
+          if(r.status == 200){
+            MySwal.fire({
+              text: "Sukses manambahkan produk!",
+              icon: "success"
+            });
+            const val = await r.json();
+            if(imageProduct){
+              await requestUploadImageProduct(val.data.id)
+            }
+          }else {
+            MySwal.fire({
+              text: "Gagal menambahkan produk!",
+              icon: "error"
+            });
           }
-        }else {
-          MySwal.fire({
-            text: "Gagal menambahkan produk!",
-            icon: "error"
-          });
-        }
-        return r
-      })
-
+          return r
+        })
+      }
     }else {
       MySwal.fire({
         text: "Harap isi semua form yang dibutuhkan!",
@@ -168,7 +173,8 @@ const FormAddProduct = (props: Props) => {
     <React.Fragment>
       <div className="row">
           <div className="col-12 mb-4">
-              <div className="card border-0 shadow components-section">
+            <h4 className="text-center">Tambah Produk</h4>
+              <div className="card border-0 shadow components-section mt-4">
                   <div className="card-body">     
                       <div style={{display: "flex", justifyContent: "center"}} className="row mb-4">
                           <div className="col-lg-6 col-sm-6">

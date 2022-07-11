@@ -26,7 +26,7 @@ const VoltWrapperContent = (props: Props) => {
                         {/* <!-- / Search form --> */}
                     </div>
                     {/* <!-- Navbar links --> */}
-                    <ul className="navbar-nav align-items-center">
+                    {/* <ul className="navbar-nav align-items-center">
                         
                         <li className="nav-item dropdown ms-lg-3">
                         <a className="nav-link dropdown-toggle pt-1 px-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -61,7 +61,7 @@ const VoltWrapperContent = (props: Props) => {
                             </a>
                         </div>
                         </li>
-                    </ul>
+                    </ul> */}
                     </div>
                 </div>
                 </nav>

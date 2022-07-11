@@ -1,5 +1,5 @@
 const Url = {
-    apiUrl: "https://tokoku.cryptaniankingdom.com"
+    apiUrl: "http://tokoku.cryptaniankingdom.com/"
 }
 
 export default Url

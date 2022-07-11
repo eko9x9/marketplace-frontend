@@ -6,67 +6,67 @@ import Url from '../../libs/url';
 
 type Props = {}
 
-const TableProductSold = (props: Props) => {    
+const TableProduct = (props: Props) => {    
     const navigate = useNavigate();
     const [tokenLogin, setTokenLogin] = useState("");
     const [selectedOrder, setSelectedOrder] = useState("");
-    const [dataOrders, setDataOrders] = useState<any>([]);
+    const [dataProduct, setDataProduct] = useState<any>([]);
     const MySwal = withReactContent(Swal);
 
     useEffect(() => {
       const tokenLogin = localStorage.getItem("tokenLogin");
-      const getDataOrders = async() => {
-          const x = await fetch(`${Url.apiUrl}/product/get-status-product-seller`, {
+      const getDataProduct = async() => {
+          const x = await fetch(`${Url.apiUrl}/product/get-product-seller`, {
               headers: {
                   "Authorization": `Bearer ${tokenLogin}`
               }
           }).then(r => r.json());
-          const filterStatus = x.filter((x: any) => x.status_order == "Barang diterima.");
-          setDataOrders(filterStatus);
+          setDataProduct(x);
+          console.log(x)
       }
       if(tokenLogin){
           setTokenLogin(tokenLogin);
-          getDataOrders();
+          getDataProduct();
       }
     }, [])
 
     return (
         <React.Fragment>
-            <h4 className="text-center">Produk Terjual</h4>
+                <h4 className="text-center">Produk Saya</h4>
                 <div className="card border-0 shadow mb-4 mt-4">
-                    <div className="card-body">
+                    <div className="card-body ">
                         <div className="table-responsive">
                             <table className="table table-centered table-nowrap mb-0 rounded">
                                 <thead className="thead-light">
                                     <tr>
                                         <th className="border-0 rounded-start">Product id</th>
-                                        <th className="border-0 rounded-start">Username pembeli</th>
                                         <th className="border-0 rounded-start">Nama Produk</th>
-                                        <th className="border-0">Total pembayaran</th>
-                                        <th className="border-0">Lokasi pengiriman</th>
-                                        <th className="border-0">Tanggal</th>
+                                        <th className="border-0 rounded-start">Harga</th>
+                                        <th className="border-0">Status produk</th>
+                                        <th className="border-0">Kategori</th>
+                                        <th className="border-0">Rata-rata bintang</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {/* <!-- Item --> */}
                                     {
-                                        dataOrders?.map((val: any) => (
+                                        dataProduct?.map((val: any) => (
                                             <tr>
-                                                <td><a href="#" className="text-primary fw-bold">{val.product.id}</a> </td>
+                                                <td><a href="#" className="text-primary fw-bold">{val?.id}</a> </td>
                                                 <td>
-                                                    {val?.user_order_product.username}
+                                                    {val?.name}
                                                 </td>
                                                 <td>
-                                                    {val?.product.name}
+                                                    {val?.price}
                                                 </td>
                                                 <td>
-                                                    Rp. {val?.total_price}
+                                                    {val?.status_product ? "Aktif": "Tidak aktif"}
                                                 </td>
                                                 <td>
-                                                    {val?.location}
+                                                    {val?.category.name}
                                                 </td>
                                                 <td>
-                                                    {val?.createdAt }
+                                                    {val?.average_stars }
                                                 </td>
                                                 
                                             </tr>        
@@ -82,4 +82,4 @@ const TableProductSold = (props: Props) => {
     )
 }
 
-export default TableProductSold
+export default TableProduct
